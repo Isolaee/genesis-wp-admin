@@ -28,6 +28,10 @@ register_activation_hook( __FILE__, 'genesis_attendance_install' );
 // --- Shortcode: [attendance_form] ---
 
 function genesis_attendance_form_shortcode() {
+    if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+        return '';
+    }
+
     global $wpdb;
     $table  = $wpdb->prefix . 'attendance_log';
     $notice = '';
