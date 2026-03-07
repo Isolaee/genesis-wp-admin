@@ -130,7 +130,13 @@ function genesis_attendance_import_csv() {
         if ( $header ) { $header = false; continue; } // skip header row
         if ( count( $row ) < 2 ) { $skipped++; continue; }
 
-        $date     = sanitize_text_field( trim( $row[0] ) );
+        $date = sanitize_text_field( trim( $row[0] ) );
+
+        // Accept DD/MM/YYYY and convert to YYYY-MM-DD
+        if ( preg_match( '/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $date, $m ) ) {
+            $date = sprintf( '%04d-%02d-%02d', $m[3], $m[2], $m[1] );
+        }
+
         $visitors = intval( $row[1] );
 
         if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) { $skipped++; continue; }
