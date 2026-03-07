@@ -4,6 +4,6 @@ deployment:
     - export DEPLOYPATH=/home/diflniqt/public_html/wp-content/plugins/genesis-wp-admin
     - test -d "$(dirname $DEPLOYPATH)" || exit 1
     - mkdir -p $DEPLOYPATH
-    - /bin/cp -R genesis-wp-admin.php assets $DEPLOYPATH/
+    - /bin/cp user-handling.php $DEPLOYPATH/
     - find $DEPLOYPATH -type f -exec chmod 644 {} \;
     - find $DEPLOYPATH -type d -exec chmod 755 {} \;
